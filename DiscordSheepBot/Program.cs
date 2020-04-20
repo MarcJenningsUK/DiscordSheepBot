@@ -29,7 +29,7 @@ namespace DiscordSheepBot
 
 			var token = System.IO.File.ReadAllText("token.txt");
 
-			await _client.LoginAsync(TokenType.Bot, token);
+			await _client.LoginAsync(TokenType.Bot, token.Trim());
 			await _client.StartAsync();
 
 			// Block this task until the program is closed.
