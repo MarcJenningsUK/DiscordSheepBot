@@ -38,6 +38,8 @@ namespace DiscordSheepBot
 
 		private async Task MessageReceived(SocketMessage message)
 		{
+			Console.WriteLine(message.Content);
+			
 			if (message.Content == "!ping")
 			{
 				await message.Channel.SendMessageAsync("You need a pong " + message.Author.Username + "?");
