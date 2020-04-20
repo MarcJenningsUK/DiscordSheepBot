@@ -44,6 +44,12 @@ namespace DiscordSheepBot.Modules
             await ReplyAsync("By the powers granted to me by my maker, I summon thee, <@!313832264792539142> ");
         }
 
+        [Command("help")]
+        public async Task HelpAsync()
+        {
+            await ReplyAsync("You don't deserve help.");
+        }
+
         // Ban a user
         [Command("ban")]
         [RequireContext(ContextType.Guild)]
