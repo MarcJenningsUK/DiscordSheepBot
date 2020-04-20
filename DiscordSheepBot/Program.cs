@@ -40,7 +40,7 @@ namespace DiscordSheepBot
 		{
 			if (message.Content == "!ping")
 			{
-				await message.Channel.SendMessageAsync("Pong!" + " " + message.Author.Username);
+				await message.Channel.SendMessageAsync("You need a pong " + message.Author.Username + "?");
 
 
 			}
