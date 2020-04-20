@@ -45,7 +45,8 @@ namespace DiscordSheepBot.Services
             // (!message.HasCharPrefix('!', ref argPos))
             // for a more traditional command format like !help.
             
-            if (!message.HasMentionPrefix(_discord.CurrentUser, ref argPos)) return;
+            // if (!message.HasMentionPrefix(_discord.CurrentUser, ref argPos)) return;
+            if (!message.HasCharPrefix('!', ref argPos)) return;
 
             var context = new SocketCommandContext(_discord, message);
             // Perform the execution of the command. In this method,
