@@ -47,7 +47,7 @@ namespace DiscordSheepBot
 			
 			if(message.Content.ToLower() == "!summonthewiseone")
 			{
-				await message.channel.SendMEssageAsync("By the powers granted me, I summon thee, <@!313832264792539142>");
+				await message.Channel.SendMessageAsync("By the powers granted me, I summon thee, <@!313832264792539142>");
 			}
 		}
 
