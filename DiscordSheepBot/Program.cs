@@ -43,8 +43,11 @@ namespace DiscordSheepBot
 			if (message.Content == "!ping")
 			{
 				await message.Channel.SendMessageAsync("You need a pong " + message.Author.Username + "?");
-
-
+			}
+			
+			if(message.Content.ToLower() == "!summonthewiseone")
+			{
+				await message.channel.SendMEssageAsync("By the powers granted me, I summon thee, <@!313832264792539142>");
 			}
 		}
 
