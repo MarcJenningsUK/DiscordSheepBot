@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
@@ -47,7 +48,10 @@ namespace DiscordSheepBot.Modules
         [Command("help")]
         public async Task HelpAsync()
         {
-            await ReplyAsync("You don't deserve help.");
+            var reply = "Available comnmands:" + Environment.NewLine;
+            ServicesCache.ServiceNames.ForEach(c => reply += c + Environment.NewLine);
+            await ReplyAsync(reply);
+            //await ReplyAsync("You don't deserve help.");
         }
 
         // Ban a user

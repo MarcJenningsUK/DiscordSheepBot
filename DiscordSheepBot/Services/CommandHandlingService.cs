@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Discord;
@@ -19,7 +20,7 @@ namespace DiscordSheepBot.Services
             _commands = services.GetRequiredService<CommandService>();
             _discord = services.GetRequiredService<DiscordSocketClient>();
             _services = services;
-
+            
             // Hook CommandExecuted to handle post-command-execution logic.
             _commands.CommandExecuted += CommandExecutedAsync;
             // Hook MessageReceived so we can process each message to see
@@ -31,6 +32,10 @@ namespace DiscordSheepBot.Services
         {
             // Register modules that are public and inherit ModuleBase<T>.
             await _commands.AddModulesAsync(Assembly.GetEntryAssembly(), _services);
+
+            var listOfCommands = _commands.Commands.Select(c => "!" + c.Name).ToList();
+            ServicesCache.ServiceNames = listOfCommands;
+            //listOfCommands.ForEach(c => Console.WriteLine(c));
         }
 
         public async Task MessageReceivedAsync(SocketMessage rawMessage)
