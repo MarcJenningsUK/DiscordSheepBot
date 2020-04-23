@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using DiscordSheepBot.Services;
 using System.Net.Http;
+using System.IO;
 
 namespace DiscordSheepBot
 {
@@ -44,6 +45,7 @@ namespace DiscordSheepBot
         private Task LogAsync(LogMessage log)
         {
             Console.WriteLine(log.ToString());
+            File.AppendAllText("logfile.txt", log.Message + Environment.NewLine);
 
             return Task.CompletedTask;
         }
