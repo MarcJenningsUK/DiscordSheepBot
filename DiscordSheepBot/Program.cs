@@ -35,6 +35,8 @@ namespace DiscordSheepBot
                 await client.LoginAsync(TokenType.Bot, token.Trim());
                 await client.StartAsync();
 
+                client.Disconnected += Client_Disconnected;
+
                 // Here we initialize the logic required to register our commands.
                 await services.GetRequiredService<CommandHandlingService>().InitializeAsync();
 
@@ -42,12 +44,16 @@ namespace DiscordSheepBot
             }
         }
 
+        private Task Client_Disconnected(Exception arg)
+        {
+            return File.AppendAllTextAsync("logfile.txt", arg.Message + Environment.NewLine + arg.StackTrace + Environment.NewLine);
+        }
+
         private Task LogAsync(LogMessage log)
         {
             Console.WriteLine(log.ToString());
-            File.AppendAllText("logfile.txt", log.Message + Environment.NewLine);
+            return File.AppendAllTextAsync("logfile.txt", log.Message + Environment.NewLine);
 
-            return Task.CompletedTask;
         }
 
         private ServiceProvider ConfigureServices()
