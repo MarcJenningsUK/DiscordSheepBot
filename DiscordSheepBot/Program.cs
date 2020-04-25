@@ -48,7 +48,7 @@ namespace DiscordSheepBot
         {
 		if(arg.GetType().ToString() == "System.Threading.Tasks.TaskCanceledException")
 		{
-			await File.AppendAllTextAsync("REBOOTME", DateTime.Now.TpoString());
+			await File.AppendAllTextAsync("REBOOTME", DateTime.Now.ToString());
 			Application.Restart();
 		}
 				
