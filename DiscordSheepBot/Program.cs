@@ -46,7 +46,10 @@ namespace DiscordSheepBot
 
         private Task Client_Disconnected(Exception arg)
         {
-            return File.AppendAllTextAsync("logfile.txt", arg.Message + Environment.NewLine + arg.StackTrace + Environment.NewLine);
+            return File.AppendAllTextAsync("logfile.txt", 
+					   arg.Message + Environment.NewLine + 
+					   arg.StackTrace + Environment.NewLine + 
+					   arg.GetType().ToString() + Environment.NewLine);
         }
 
         private Task LogAsync(LogMessage log)
