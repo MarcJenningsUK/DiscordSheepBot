@@ -46,10 +46,17 @@ namespace DiscordSheepBot
 
         private Task Client_Disconnected(Exception arg)
         {
+		if(arg.GetType().ToString() == "System.Threading.Tasks.TaskCanceledException")
+		{
+			await File.AppendAllTextAsync("REBOOTME", arg.Message);
+		}
+				
             return File.AppendAllTextAsync("logfile.txt", 
 					   arg.Message + Environment.NewLine + 
 					   arg.StackTrace + Environment.NewLine + 
 					   arg.GetType().ToString() + Environment.NewLine);
+		
+		
         }
 
         private Task LogAsync(LogMessage log)
