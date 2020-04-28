@@ -14,7 +14,7 @@ namespace DiscordSheepBot
     {
 		private DiscordSocketClient _client;
 
-        private static System.Threading.CancellationTokenSource ctoken = new System.Threading.CancellationTokenSource();
+        //private static System.Threading.CancellationTokenSource ctoken = new System.Threading.CancellationTokenSource();
 
 		public static void Main(string[] args)
         => new Program().MainAsync().GetAwaiter().GetResult();
@@ -43,9 +43,11 @@ namespace DiscordSheepBot
                 // Here we initialize the logic required to register our commands.
                 await services.GetRequiredService<CommandHandlingService>().InitializeAsync();
 
-                await Task.Delay(-1, ctoken.Token);
+                await Task.Delay(-1);
 
-                System.Diagnostics.Process.Start("/root/progs/SheepBot/DiscordSheepBot");
+                //await Task.Delay(-1, ctoken.Token);
+
+                //System.Diagnostics.Process.Start("/root/progs/SheepBot/DiscordSheepBot");
             }
         }
 
@@ -54,7 +56,7 @@ namespace DiscordSheepBot
 		    if(arg.GetType().ToString() == "System.Threading.Tasks.TaskCanceledException")
 		    {
 			    File.AppendAllTextAsync("REBOOTME", DateTime.Now.ToString());
-                ctoken.Cancel();
+                //ctoken.Cancel();
 		    }
             
             return File.AppendAllTextAsync("logfile.txt", 
