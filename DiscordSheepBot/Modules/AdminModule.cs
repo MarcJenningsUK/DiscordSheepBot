@@ -27,11 +27,29 @@ namespace DiscordSheepBot.Modules
         [Command("swear")]
         [RequireContext(ContextType.Guild)]
         [RequireUserPermission(GuildPermission.Administrator)]
-        public async Task SwearAsync()
+        public async Task SwearAsync([Remainder] string text)
         {
             var r = new Random();
-            var swears = new List<string> { "Cock", "Dick", "Pillock", "Flange" };
-            await ReplyAsync(swears.OrderBy(s => r.Next() ).First() );
+            var swears = new List<string> { "Cock", "Dick", "Pillock", "Flange", "wanker", "Titties", "Nipple" };
+            int count = 1;
+            if(remainder.StartsWith("x"))
+            {
+                remainder = remainder.Replace("x", "");
+                if(!int.TryParse(remainder, out count))
+                {
+                    await ReplyAsync(swears.OrderBy(s => r.Next() ).First() );
+                }
+                
+                if(count > 5)
+                {
+                    await ReplyAsync("Don't be greedy");
+                }
+                else
+                for(int i = 0; i < count; i++)
+                {
+                    await ReplyAsync(swears.OrderBy(s => r.Next() ).First() );
+                }
+            }
         }
 
         //[Command("clearbot")]
