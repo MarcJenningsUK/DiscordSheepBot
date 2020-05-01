@@ -32,10 +32,10 @@ namespace DiscordSheepBot.Modules
             var r = new Random();
             var swears = new List<string> { "Cock", "Dick", "Pillock", "Flange", "wanker", "Titties", "Nipple" };
             int count = 1;
-            if(remainder.StartsWith("x"))
+            if(text.StartsWith("x"))
             {
-                remainder = remainder.Replace("x", "");
-                if(!int.TryParse(remainder, out count))
+                text = text.Replace("x", "");
+                if(!int.TryParse(text, out count))
                 {
                     await ReplyAsync(swears.OrderBy(s => r.Next() ).First() );
                 }
