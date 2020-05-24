@@ -82,7 +82,7 @@ private async void doBadWordFilter(SocketUserMessage message)
 
     var context = new SocketCommandContext(_discord, message);
 
-    await context.Channel.SendMessageAsync($"The naughty user <@{message.Author.Id}> said : {content}");
+    await context.Channel.SendMessageAsync($"The naughty user <@{message.Author.Id}> said : \n> {content}");
     await message.DeleteAsync();
 }
 
