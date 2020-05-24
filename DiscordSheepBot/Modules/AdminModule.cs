@@ -51,7 +51,7 @@ namespace DiscordSheepBot.Modules
                 }
             }
         }
-
+        
         //[Command("clearbot")]
         //[RequireContext(ContextType.Guild)]
         //// make sure the user invoking the command can ban

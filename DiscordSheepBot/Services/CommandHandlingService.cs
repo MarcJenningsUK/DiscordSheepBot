@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -38,11 +39,20 @@ namespace DiscordSheepBot.Services
             //listOfCommands.ForEach(c => Console.WriteLine(c));
         }
 
+        List<string> badWords = new List<string> { "banana", "concurrent" }; 
+
         public async Task MessageReceivedAsync(SocketMessage rawMessage)
         {
             // Ignore system messages, or messages from other bots
             if (!(rawMessage is SocketUserMessage message)) return;
             if (message.Source != MessageSource.User) return;
+
+// routine to catch naughty words.
+if(badWords.Any(w => message.Content.ToLower().Contains(w.ToLower())))
+{
+    doBadWordFilter(message);
+    return;
+}
 
             // This value holds the offset where the prefix ends
             var argPos = 0;
@@ -61,6 +71,20 @@ namespace DiscordSheepBot.Services
             // Note that normally a result will be returned by this format, but here
             // we will handle the result in CommandExecutedAsync,
         }
+
+private async void doBadWordFilter(SocketUserMessage message)
+{
+    var content = message.Content;
+    foreach (var b in badWords)
+    {
+        content = System.Text.RegularExpressions.Regex.Replace(content, b, "x".PadRight(b.Length, 'x'), System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+    }
+
+    var context = new SocketCommandContext(_discord, message);
+
+    await context.Channel.SendMessageAsync($"The naughty user <@{message.Author.Id}> said : {content}");
+    await message.DeleteAsync();
+}
 
         public async Task CommandExecutedAsync(Optional<CommandInfo> command, ICommandContext context, IResult result)
         {
