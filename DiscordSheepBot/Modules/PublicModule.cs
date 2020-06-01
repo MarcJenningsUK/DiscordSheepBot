@@ -33,7 +33,7 @@ namespace DiscordSheepBot.Modules
         public async Task UserInfoAsync(IUser user = null)
         {
             user = user ?? Context.User;
-
+            await ReplyAsync(user.Id.ToString());
             await ReplyAsync(user.ToString());
         }
 
